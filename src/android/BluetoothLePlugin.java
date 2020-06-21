@@ -1142,8 +1142,9 @@ public class BluetoothLePlugin extends CordovaPlugin {
       int manufacturerId = obj.optInt(keyManufacturerId, 0);
       String manufacturerData = obj.optString(keyManufacturerData, null);
 
-      if (manufacturerData != "") {
-          byte[] manufacturerDataBytes = Base64.decode(manufacturerData, Base64.NO_WRAP);
+      byte[] manufacturerDataBytes = null;
+      if (!manufacturerData.isEmpty()) {
+          manufacturerDataBytes = Base64.decode(manufacturerData, Base64.NO_WRAP);
       }
 
       ScanFilter.Builder builder = new ScanFilter.Builder();
