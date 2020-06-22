@@ -1143,7 +1143,7 @@ public class BluetoothLePlugin extends CordovaPlugin {
       String manufacturerData = obj.optString(keyManufacturerData, null);
 
       byte[] manufacturerDataBytes = null;
-      if (manufacturerData != null && !manufacturerData.isEmpty()) {
+      if (manufacturerData != null) {
           manufacturerDataBytes = Base64.decode(manufacturerData, Base64.NO_WRAP);
       }
 
