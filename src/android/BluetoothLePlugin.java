@@ -1139,7 +1139,7 @@ public class BluetoothLePlugin extends CordovaPlugin {
       }
 
       /* build the ScanFilter for Apple background devices */
-      int manufacturerId = obj.optInt(keyManufacturerId, 0);
+      int manufacturerId = obj.optInt(keyManufacturerId, null);
       String manufacturerData = obj.optString(keyManufacturerData, null);
 
       byte[] manufacturerDataBytes = null;
@@ -1147,10 +1147,12 @@ public class BluetoothLePlugin extends CordovaPlugin {
           manufacturerDataBytes = Base64.decode(manufacturerData, Base64.NO_WRAP);
       }
 
-      ScanFilter.Builder builder = new ScanFilter.Builder();
-      builder.setServiceUuid(null);
-      builder.setManufacturerData(manufacturerId, manufacturerDataBytes);
-      scanFilter.add(builder.build());
+      if (manufacturerId != null && manufacturerData != null) {
+          ScanFilter.Builder builder = new ScanFilter.Builder();
+          builder.setServiceUuid(null);
+          builder.setManufacturerData(manufacturerId, manufacturerDataBytes);
+          scanFilter.add(builder.build());
+      }
 
       /* build the ScanSetting */
       ScanSettings.Builder scanSettings = new ScanSettings.Builder();
